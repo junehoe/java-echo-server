@@ -19,12 +19,13 @@ public class AppTest {
     private final InputStream originalIn = System.in;
     private final PrintStream originalOut = System.out;
 
-    @Before public void initialize() {
-        classUnderTest = new App();
+    public void setupStreams() {
+      System.setOut(new PrintStream(outContent));
     }
 
-    @Before public void setupStreams() {
-        System.setOut(new PrintStream(outContent));
+    @Before public void initialize() {
+        classUnderTest = new App();
+        setupStreams();
     }
 
     @After public void restoreStreams() {
