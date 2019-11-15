@@ -10,7 +10,7 @@ import java.io.PrintWriter;
 import java.io.StringReader;
 import java.io.StringWriter;
 
-public class MockClientWrapperTest {
+public class MockClientSocketWrapperTest {
     MockClientSocketWrapper mockClientSocketWrapper;
 
     @Before

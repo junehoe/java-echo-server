@@ -17,11 +17,13 @@ public class MockServerSocketWrapperTest {
     private final InputStream originalIn = System.in;
     private final PrintStream originalOut = System.out;
 
-    @Before public void setupStreams() {
+    public void setupStreams() {
         System.setOut(new PrintStream(outContent));
     }
 
-    @Before public void initialize() {
+    @Before
+    public void initialize() {
+        setupStreams();
         BufferedReader input = new BufferedReader(new StringReader("hello\n"));
         PrintWriter output = new PrintWriter(new StringWriter(), true);
         mockServerSocketWrapper = new MockServerSocketWrapper(input, output);
@@ -30,20 +32,24 @@ public class MockServerSocketWrapperTest {
         server.start(port);
     }
 
-    @After public void restoreStreams() {
+    @After
+    public void restoreStreams() {
         System.setIn(originalIn);
         System.setOut(originalOut);
     }
 
-    @Test public void serverSocketGetsCreatedWithPort() {
-        assertTrue(mockServerSocketWrapper.wascreateSocketCalled());
+    @Test
+    public void serverSocketGetsCreatedWithPort() {
+        assertTrue(mockServerSocketWrapper.wasCreateSocketCalled());
     }
 
-    @Test public void dataIsSentAcrossSocket() {
+    @Test
+    public void dataIsSentAcrossSocket() {
         assertEquals("hello", mockServerSocketWrapper.getSentData());
     }
 
-    @Test public void testToSeeIfCloseWasCalled() {
+    @Test
+    public void testToSeeIfCloseWasCalled() {
         assertTrue(mockServerSocketWrapper.wasCloseCalled());
     }
 }
