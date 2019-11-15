@@ -1,4 +1,5 @@
 package echoserver;
+
 public interface ServerSocketWrapperInterface {
     void createSocket(int port);
     String receiveData();
