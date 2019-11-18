@@ -9,8 +9,9 @@ public class Server {
 
     public void start(int port) {
         socketWrapper.createSocket(port);
-        String input = socketWrapper.receiveData();
-        socketWrapper.sendData(input);
-        socketWrapper.close();
+        while (true) {
+            String input = socketWrapper.receiveData();
+            socketWrapper.sendData(input);
+        }
     }
 }
