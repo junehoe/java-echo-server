@@ -36,7 +36,8 @@ public class EchoServer implements Runnable {
     public void echo() {
         String inputString;
         while ((inputString = SocketIO.readFromInputStream(input)) != null) {
-            if (isQuitInput(inputString)) {
+            if (InputValidator.isQuit(inputString)) {
+                close();
                 break;
             }
             SocketIO.writeToOutputStream(output, inputString);
@@ -48,7 +49,13 @@ public class EchoServer implements Runnable {
         setServerOut(SocketIO.createSocketWriter(clientSocket));
     }
 
-    private boolean isQuitInput(String input) {
-        return input.toLowerCase().trim().equals(QUIT);
+    private void close() {
+        try {
+            input.close();
+            output.close();
+            clientSocket.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

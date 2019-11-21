@@ -6,13 +6,14 @@ import java.io.IOException;
 import java.lang.Thread;
 
 public class App {
-    public static void main(String[] args) {
-        if (args.length != 1) {
-            System.err.println("Port number was not specified");
-            System.exit(1);
-        }
+    private static int port = 4242;
 
-        int port = Integer.parseInt(args[0]);
+    public static void main(String[] args) {
+        if (args.length >= 1 && InputValidator.isValidPort(args[0])) {
+            port = Integer.parseInt(args[0]);
+        } else {
+            System.out.println("Invalid port provided. Defaulting to port 4242");
+        }
 
         try {
             ServerSocket serverSocket = SocketCreator.createServerSocket(port);
