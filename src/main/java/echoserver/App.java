@@ -9,7 +9,8 @@ public class App {
     private static int port = 4242;
 
     public static void main(String[] args) {
-        if (args.length >= 1 && InputValidator.isValidPort(args[0])) {
+        InputValidator inputValidator = new InputValidator();
+        if (args.length >= 1 && inputValidator.isValidPort(args[0])) {
             port = Integer.parseInt(args[0]);
         } else {
             System.out.println("Invalid port provided. Defaulting to port 4242");

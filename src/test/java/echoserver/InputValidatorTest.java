@@ -1,46 +1,54 @@
 package echoserver;
 
 import org.junit.Test;
+import org.junit.Before;
 import static org.junit.Assert.*;
 
 public class InputValidatorTest {
+    InputValidator inputValidator;
+
+    @Before
+    public void initialize() {
+        inputValidator = new InputValidator();
+    }
+
     @Test
     public void returnsTrueIfInputEqualsQuit() {
-        assertTrue(InputValidator.isQuit("quit"));
+        assertTrue(inputValidator.isQuit("quit"));
     }
 
     @Test
     public void returnsFalseIfInputIsNotQuit() {
-        assertFalse(InputValidator.isQuit("hello"));
+        assertFalse(inputValidator.isQuit("hello"));
     }
 
     @Test
     public void returnsTrueRegardlessOfCaseSensitivityForQuit() {
-        assertTrue(InputValidator.isQuit("QuIT"));
+        assertTrue(inputValidator.isQuit("QuIT"));
     }
 
     @Test
     public void returnsTrueIfQuitHasSpacesAtTheEnd() {
-        assertTrue(InputValidator.isQuit("quit    "));
+        assertTrue(inputValidator.isQuit("quit    "));
     }
 
     @Test
     public void returnsTrueIfQuitHasNewLineAtTheEnd() {
-        assertTrue(InputValidator.isQuit("quit\n"));
+        assertTrue(inputValidator.isQuit("quit\n"));
     }
 
     @Test
     public void returnsTrueIfValidPortArgIsProvided() {
-        assertTrue(InputValidator.isValidPort("5000"));
+        assertTrue(inputValidator.isValidPort("5000"));
     }
 
     @Test
     public void returnsFalseIfInvalidPortArgIsProvided() {
-        assertFalse(InputValidator.isValidPort("yo80"));
+        assertFalse(inputValidator.isValidPort("yo80"));
     }
 
     @Test
     public void returnsFalseIfPortArgIsNull() {
-        assertFalse(InputValidator.isValidPort(null));
+        assertFalse(inputValidator.isValidPort(null));
     }
 }
