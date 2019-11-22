@@ -11,6 +11,7 @@ Inside of the directory, run the following to start the server:
 ```
 gradle run -Pport=<desired-port-number>
 ```
+NOTE: If no port is specified, the port number will be defaulted to `4242`.
 To run client:
 ```
 nc <ip-address> <port-number-of-server-socket>
