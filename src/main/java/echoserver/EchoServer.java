@@ -12,16 +12,17 @@ public class EchoServer implements Runnable {
 
     public EchoServer(Socket clientSocket) {
         this.clientSocket = clientSocket;
-    }
-
-    public void run() {
         try {
-            setServerInputOutput(clientSocket);
-            output.println("Connected to server");
-            echo();
+            this.input = SocketIO.createSocketReader(clientSocket);
+            this.output = SocketIO.createSocketWriter(clientSocket);
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public void run() {
+        output.println("Connected to server");
+        echo();
     }
 
     private void echo() {
@@ -33,19 +34,6 @@ public class EchoServer implements Runnable {
             }
             SocketIO.writeToOutputStream(output, inputString);
         }
-    }
-
-    private void setServerInputOutput(Socket clientSocket) throws IOException {
-        setServerIn(SocketIO.createSocketReader(clientSocket));
-        setServerOut(SocketIO.createSocketWriter(clientSocket));
-    }
-
-    private void setServerIn(Scanner in) {
-        input = in;
-    }
-
-    private void setServerOut(PrintWriter out) {
-        output = out;
     }
 
     private void close() {

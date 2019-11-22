@@ -8,7 +8,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import org.mockito.Mock;
-import org.mockito.InjectMocks;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import static org.junit.Assert.*;
@@ -16,11 +15,9 @@ import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class EchoServerTest {
+
     @Mock
     Socket clientSocket;
-
-    @InjectMocks
-    EchoServer server = new EchoServer(clientSocket);
 
     @Test
     public void testServerCanEchoMessage() throws IOException {
@@ -28,6 +25,7 @@ public class EchoServerTest {
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         when(clientSocket.getInputStream()).thenReturn(new ByteArrayInputStream(inputString.getBytes()));
         when(clientSocket.getOutputStream()).thenReturn(outContent);
+        EchoServer server = new EchoServer(clientSocket);
 
         server.run();
 
@@ -40,6 +38,7 @@ public class EchoServerTest {
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         when(clientSocket.getInputStream()).thenReturn(new ByteArrayInputStream(inputString.getBytes()));
         when(clientSocket.getOutputStream()).thenReturn(outContent);
+        EchoServer server = new EchoServer(clientSocket);
 
         server.run();
 
