@@ -25,7 +25,7 @@ public class EchoServerTest {
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         when(clientSocket.getInputStream()).thenReturn(new ByteArrayInputStream(inputString.getBytes()));
         when(clientSocket.getOutputStream()).thenReturn(outContent);
-        EchoServer server = new EchoServer(clientSocket);
+        EchoServer server = new EchoServer(clientSocket, new InputValidator());
 
         server.run();
 
@@ -38,7 +38,7 @@ public class EchoServerTest {
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         when(clientSocket.getInputStream()).thenReturn(new ByteArrayInputStream(inputString.getBytes()));
         when(clientSocket.getOutputStream()).thenReturn(outContent);
-        EchoServer server = new EchoServer(clientSocket);
+        EchoServer server = new EchoServer(clientSocket, new InputValidator());
 
         server.run();
 

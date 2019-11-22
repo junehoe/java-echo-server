@@ -20,7 +20,7 @@ public class App {
             System.out.println("Server started on port " + port);
             while (true) {
                 Socket clientSocket = SocketCreator.createClientSocket(serverSocket);
-                Thread echoThread = new Thread(new EchoServer(clientSocket));
+                Thread echoThread = new Thread(new EchoServer(clientSocket, new InputValidator()));
                 echoThread.start();
             }
         } catch (IOException e) {

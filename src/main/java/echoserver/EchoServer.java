@@ -6,12 +6,14 @@ import java.net.Socket;
 import java.util.Scanner;
 
 public class EchoServer implements Runnable {
+    private Socket clientSocket;
+    private InputValidator inputValidator;
     private Scanner input;
     private PrintWriter output;
-    private Socket clientSocket;
 
-    public EchoServer(Socket clientSocket) {
+    public EchoServer(Socket clientSocket, InputValidator inputValidator) {
         this.clientSocket = clientSocket;
+        this.inputValidator = inputValidator;
         try {
             this.input = SocketIO.createSocketReader(clientSocket);
             this.output = SocketIO.createSocketWriter(clientSocket);
@@ -28,7 +30,7 @@ public class EchoServer implements Runnable {
     private void echo() {
         String inputString;
         while ((inputString = SocketIO.readFromInputStream(input)) != null) {
-            if (InputValidator.isQuit(inputString)) {
+            if (inputValidator.isQuit(inputString)) {
                 close();
                 break;
             }
