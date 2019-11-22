@@ -16,6 +16,8 @@ To run client:
 ```
 nc <ip-address> <port-number-of-server-socket>
 ```
+To exit the server, press `Ctrl-D`.
+To exit the client, enter `quit` or press `Ctrl-D`.
 ### Example
 If you would like to create a server on port `4242`, then you would run:
 ```
