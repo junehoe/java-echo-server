@@ -20,37 +20,22 @@ public class SocketCreatorTest {
     ServerSocket mockServerSocket;
 
     @Test
-    public void testServerSocketGetsCreated() {
-        try {
-            assertNotNull(SocketCreator.createServerSocket(1234));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public void testServerSocketGetsCreated() throws IOException {
+        assertNotNull(SocketCreator.createServerSocket(1234));
     }
 
     @Test
-    public void testServerSocketWithSpecificPortGetsCreated() {
+    public void testServerSocketWithSpecificPortGetsCreated() throws IOException {
         final int testPort = 9001;
-        try {
-            ServerSocket testServerSocket = SocketCreator.createServerSocket(testPort);
-            assertEquals(testServerSocket.getLocalPort(), testPort);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        ServerSocket testServerSocket = SocketCreator.createServerSocket(testPort);
+
+        assertEquals(testServerSocket.getLocalPort(), testPort);
     }
 
     @Test
-    public void testClientSocketGetsCreated() {
-        try {
-            when(mockServerSocket.accept()).thenReturn(new Socket());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public void testClientSocketGetsCreated() throws IOException {
+        when(mockServerSocket.accept()).thenReturn(new Socket());
 
-        try {
-            assertNotNull(SocketCreator.createClientSocket(mockServerSocket));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        assertNotNull(SocketCreator.createClientSocket(mockServerSocket));
     }
 }

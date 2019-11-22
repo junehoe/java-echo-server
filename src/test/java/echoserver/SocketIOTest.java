@@ -25,23 +25,17 @@ public class SocketIOTest {
     OutputStream outputStream;
 
     @Test
-    public void testSocketInputGetsCreated() {
-        try {
-            when(clientSocket.getInputStream()).thenReturn(inputStream);
-            assertNotNull(SocketIO.createSocketReader(clientSocket));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public void testSocketInputGetsCreated() throws IOException {
+        when(clientSocket.getInputStream()).thenReturn(inputStream);
+
+        assertNotNull(SocketIO.createSocketReader(clientSocket));
     }
 
     @Test
-    public void testSocketOutputGetsCreated() {
-        try {
-            when(clientSocket.getOutputStream()).thenReturn(outputStream);
-            assertNotNull(SocketIO.createSocketWriter(clientSocket));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public void testSocketOutputGetsCreated() throws IOException {
+        when(clientSocket.getOutputStream()).thenReturn(outputStream);
+
+        assertNotNull(SocketIO.createSocketWriter(clientSocket));
     }
 
     @Test
