@@ -34,6 +34,7 @@ public class EchoServer implements Runnable {
                 close();
                 break;
             }
+            System.out.println(clientSocket.getInetAddress() + ": " + inputString);
             SocketIO.writeToOutputStream(output, inputString);
         }
     }
