@@ -6,7 +6,6 @@ import java.net.Socket;
 import java.util.Scanner;
 
 public class EchoServer implements Runnable {
-    private final String QUIT = "quit";
     private Scanner input;
     private PrintWriter output;
     private Socket clientSocket;
@@ -25,15 +24,7 @@ public class EchoServer implements Runnable {
         }
     }
 
-    public void setServerIn(Scanner in) {
-        input = in;
-    }
-
-    public void setServerOut(PrintWriter out) {
-        output = out;
-    }
-
-    public void echo() {
+    private void echo() {
         String inputString;
         while ((inputString = SocketIO.readFromInputStream(input)) != null) {
             if (InputValidator.isQuit(inputString)) {
@@ -47,6 +38,14 @@ public class EchoServer implements Runnable {
     private void setServerInputOutput(Socket clientSocket) throws IOException {
         setServerIn(SocketIO.createSocketReader(clientSocket));
         setServerOut(SocketIO.createSocketWriter(clientSocket));
+    }
+
+    private void setServerIn(Scanner in) {
+        input = in;
+    }
+
+    private void setServerOut(PrintWriter out) {
+        output = out;
     }
 
     private void close() {
